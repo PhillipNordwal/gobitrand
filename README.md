@@ -13,6 +13,7 @@ Consume parts of the entropy bits at a time.
 
 ## Benchmark
 1. go test github.com/PhillipNordwal/gobitrand -bench=".*"
+
 ### Benchmark Results
 BenchmarkTwo_bits_speed 500000000                5.34 ns/op
 
