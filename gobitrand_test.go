@@ -29,7 +29,22 @@ func TestTwo_bits_cyclesCount(t *testing.T) {
 	for i:=0; i<17; i++ {
 		Two_bits()
 	}
-	if used != 2{
+	if used != 2 {
 		t.Error("The used variable didn't wrap on use.")
+	}
+}
+
+// TestTwo_bits_successive sets the entropy pool and checks that
+// successive calls return the proper number
+func TestTwo_bits_successive(t *testing.T) {
+	used = 0
+	// should be to 0b11100100000110111110010000011011
+	// or 4#3210012332100123
+	src = 0xE41BE41B
+	res := []uint8{3,2,1,0,0,1,2,3,3,2,1,0,0,1,2,3}
+	for i:=0; i<16; i++ {
+		if res[i] != Two_bits(){
+			t.Error("Two_bits isn't properly returning src.")
+		}
 	}
 }
