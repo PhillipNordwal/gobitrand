@@ -1,6 +1,7 @@
 package gobitrand
 import (
 	"testing"
+	"math/rand"
 )
 
 // TestRefillZerosCount checks to make user used is zero after refill
@@ -13,7 +14,7 @@ func TestRefillZerosCount(t *testing.T) {
 }
 
 // TestTwo_bits_increasesCount checks to make sure that used goes up
-// by two when two bits are requested
+// by two when two bits are requested.
 func TestTwo_bits_increasesCount(t *testing.T) {
 	refill()
 	Two_bits()
@@ -23,7 +24,7 @@ func TestTwo_bits_increasesCount(t *testing.T) {
 }
 
 // TestTwo_bits_cyclesCount checks to make sure that after the
-// entropy pool is exhausted that usde gets set to two
+// entropy pool is exhausted that usde gets set to two.
 func TestTwo_bits_cyclesCount(t *testing.T) {
 	refill()
 	for i:=0; i<17; i++ {
@@ -35,7 +36,7 @@ func TestTwo_bits_cyclesCount(t *testing.T) {
 }
 
 // TestTwo_bits_successive sets the entropy pool and checks that
-// successive calls return the proper number
+// successive calls return the proper number.
 func TestTwo_bits_successive(t *testing.T) {
 	used = 0
 	// should be to 0b11100100000110111110010000011011
@@ -46,5 +47,21 @@ func TestTwo_bits_successive(t *testing.T) {
 		if res[i] != Two_bits(){
 			t.Error("Two_bits isn't properly returning src.")
 		}
+	}
+}
+
+// BenchmarkTwo_bits_speed will report how fast accessing two bits of
+// entropy is.
+func BenchmarkTwo_bits_speed(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Two_bits()
+	}
+}
+
+// BenchmarkRand_Intn_four will report how fast accessing two bits of
+// entropy is using rand.Intn(4).
+func BenchmarkRand_Intn_four(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		rand.Intn(4)
 	}
 }
