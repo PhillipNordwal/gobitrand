@@ -15,6 +15,7 @@ Consume parts of the entropy bits at a time.
 1. go test github.com/PhillipNordwal/gobitrand -bench=".*"
 ### Benchmark Results
 BenchmarkTwo_bits_speed 500000000                5.34 ns/op
+
 BenchmarkRand_Intn_four 50000000                37.5 ns/op
 
 ## Profile
